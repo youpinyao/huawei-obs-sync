@@ -19,6 +19,10 @@ module.exports = function exec(cmd, inherit = false) {
 
   const result = spawn.sync(obsutil, cmd, inherit ? spawnOption : {});
 
+  if (result.error) {
+    throw result.error;
+  }
+
   return toString(result);
 }
 
