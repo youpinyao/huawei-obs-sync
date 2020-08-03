@@ -4,7 +4,7 @@ const commander = require('commander');
 const config = require('./src/config');
 
 commander
-  .version(require(config.package).version)
+  .version(require('./package.json').version)
   .option('-i, --init [type]', 'init a config file type = all,base,obs')
   .option('-ls, --list [obs]', 'list file or bucket')
   .option('-m, --marker [marker]', 'list marker, use with -ls or --list')

@@ -1,7 +1,8 @@
-
-const obsutil = require('./obsutil');
+const os = require('os');
+const platform = os.platform();
 const input = require('input');
 const fs = require('fs');
+const obsutil = require('./obsutil');
 const config = require('./config');
 
 const inputOption = {
@@ -14,9 +15,9 @@ const inputOption = {
 }
 
 module.exports = {
-  all() {
+  async all() {
+    await obs();
     base();
-    obs();
   },
   base,
   obs,
@@ -27,10 +28,15 @@ function base() {
 }
 
 async function obs() {
+  let obsutilPath;
+  if (platform !== 'win32') {
+    obsutilPath = await getText('obsutil path');
+  }
   const obs = await getText('obs path');
   const dir = await getText('sync dir');
 
   config.set({
+    obsutil: obsutilPath,
     obs,
     dir,
   });

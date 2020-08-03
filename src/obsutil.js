@@ -3,9 +3,8 @@ const platform = os.platform();
 const chalk = require('chalk');
 const path = require('path');
 const spawn = require('cross-spawn');
+const config = require('./config');
 const spawnOption = { stdio: 'inherit' };
-
-console.log('platform', platform);
 
 module.exports = function exec(cmd, inherit = false) {
   // const obsutil = {
@@ -13,8 +12,11 @@ module.exports = function exec(cmd, inherit = false) {
   //   'linux': path.resolve(__dirname, '../package/obsutil_linux_amd64_5.2.5/obsutil'),
   //   'win32': 'obsutil',
   // }[platform];
+  const {
+    obsutil: defaultObsutil,
+  } = config.get();
 
-  const obsutil = 'obsutil';
+  const obsutil = defaultObsutil || 'obsutil';
 
   if (!obsutil) {
     throw new Error(`${platform} obsutil is undefined, please install obsutil, https://support.huaweicloud.com/utiltg-obs/obs_11_0003.html`);

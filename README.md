@@ -1,5 +1,9 @@
 # HUAWEI OBS
 
+## 下载地址
+
+[https://support.huaweicloud.com/utiltg-obs/obs_11_0003.html](https://support.huaweicloud.com/utiltg-obs/obs_11_0003.html)
+
 ## 初始化配置
 ```node
 obs --init
