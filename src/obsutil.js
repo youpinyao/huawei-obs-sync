@@ -8,25 +8,28 @@ const spawnOption = { stdio: 'inherit' };
 console.log('platform', platform);
 
 module.exports = function exec(cmd, inherit = false) {
-  const obsutil = {
-    'darwin': path.resolve(__dirname, '../package/obsutil_darwin_amd64_5.2.5/obsutil'),
-    'linux': path.resolve(__dirname, '../package/obsutil_linux_amd64_5.2.5/obsutil'),
-    'win32': 'obsutil',
-  }[platform];
+  // const obsutil = {
+  //   'darwin': path.resolve(__dirname, '../package/obsutil_darwin_amd64_5.2.5/obsutil'),
+  //   'linux': path.resolve(__dirname, '../package/obsutil_linux_amd64_5.2.5/obsutil'),
+  //   'win32': 'obsutil',
+  // }[platform];
+
+  const obsutil = 'obsutil';
 
   if (!obsutil) {
-    // window自定运行安装
-    if (platform === 'win32') {
-      spawn.sync(path.resolve(__dirname, '../package/obsutil_windows_amd64_5.2.5/obsutil.exe'), [], spawnOption);
-    }
-    throw new Error(`${platform} obsutil undefined`);
+    throw new Error(`${platform} obsutil is undefined, please install obsutil, https://support.huaweicloud.com/utiltg-obs/obs_11_0003.html`);
   }
 
   const result = spawn.sync(obsutil, cmd, inherit ? spawnOption : {});
 
   if (result.error) {
-    throw result.error;
+    if (result.error.stack.indexOf('obsutil ENOENT') !== -1) {
+      throw Error('please install obsutil');
+    } else {
+      throw result.error;
+    }
   }
+
 
   if (needSetAkSkEndPoint(toString(result))) {
     console.log(chalk.yellow('please run: obs --init'));
