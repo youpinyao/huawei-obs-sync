@@ -5,12 +5,7 @@ module.exports = ({
   obs,
   dir,
 }) => {
-  if (!obs) {
-    throw new Error('please obs path');
-  }
-  if (!dir) {
-    throw new Error('please dir path');
-  }
+  handle.obsDir({ obs, dir });
 
   const from = path.join(obs, dir).replace(/obs:/, 'obs:/');
   const to = path.resolve(process.cwd());

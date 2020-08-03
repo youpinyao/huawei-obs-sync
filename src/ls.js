@@ -1,5 +1,14 @@
 const obsutil = require("./obsutil")
 
-module.exports = function () {
-  return obsutil(['ls', '-s'], true);
+module.exports = function (obs, marker) {
+  const arr = [];
+
+  if (obs) {
+    arr.push(obs);
+  }
+  if (marker) {
+    arr.push('-marker=' + marker)
+  }
+
+  return obsutil(['ls', ...arr], true);
 }

@@ -1,8 +1,8 @@
-const download = require('./src/download');
+const { upload } = require('./src/sync');
 
-console.log(download({
-  obs: 'obs://anta-cn-web/wxs_antacn',
-  dir: 'images',
+console.log(upload({
+  obs: 'obs://anta-cn-web',
+  dir: 'wxs_antacn',
 }));
 
 // const upload = require('./src/upload');

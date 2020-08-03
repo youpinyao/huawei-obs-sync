@@ -1,5 +1,6 @@
 const os = require('os');
 const platform = os.platform();
+const chalk = require('chalk');
 const path = require('path');
 const spawn = require('cross-spawn');
 const spawnOption = { stdio: 'inherit' };
@@ -14,6 +15,10 @@ module.exports = function exec(cmd, inherit = false) {
   }[platform];
 
   if (!obsutil) {
+    // window自定运行安装
+    if (platform === 'win32') {
+      spawn.sync(path.resolve(__dirname, '../package/obsutil_windows_amd64_5.2.5/obsutil.exe'), [], spawnOption);
+    }
     throw new Error(`${platform} obsutil undefined`);
   }
 
@@ -21,6 +26,10 @@ module.exports = function exec(cmd, inherit = false) {
 
   if (result.error) {
     throw result.error;
+  }
+
+  if (needSetAkSkEndPoint(toString(result))) {
+    console.log(chalk.yellow('please run: obs --init'));
   }
 
   return toString(result);
