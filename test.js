@@ -5,9 +5,9 @@ console.log(upload({
   dir: 'wxs_antacn',
 }));
 
-// const upload = require('./src/upload');
+// const { download } = require('./src/sync');
 
-// console.log(upload({
-//   obs: 'obs://anta-cn-web/wxs_antacn',
-//   dir: 'images',
+// console.log(download({
+//   obs: 'obs://anta-cn-web',
+//   dir: 'wxs_antacn',
 // }));
