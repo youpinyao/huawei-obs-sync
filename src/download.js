@@ -1,5 +1,6 @@
 const obsutil = require('./obsutil');
 const path = require('path');
+const config = require('./config');
 
 module.exports = ({
   obs,
@@ -7,7 +8,7 @@ module.exports = ({
 }) => {
   handle.obsDir({ obs, dir });
 
-  const from = path.join(obs, dir).replace(/obs:/, 'obs:/');
+  const from = config.config.replaceObs(path.join(obs, dir));
   const to = path.resolve(process.cwd());
 
   const result = obsutil(['cp', from, to, '-f', '-r'], true);

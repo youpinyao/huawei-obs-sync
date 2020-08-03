@@ -1,5 +1,3 @@
-const os = require('os');
-const platform = os.platform();
 const input = require('input');
 const fs = require('fs');
 const obsutil = require('./obsutil');
@@ -29,7 +27,7 @@ function base() {
 
 async function obs() {
   let obsutilPath;
-  if (platform !== 'win32') {
+  if (config.platform !== 'win32') {
     obsutilPath = await getText('obsutil path');
   }
   const obs = await getText('obs path');

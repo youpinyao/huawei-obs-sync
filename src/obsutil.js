@@ -1,5 +1,3 @@
-const os = require('os');
-const platform = os.platform();
 const chalk = require('chalk');
 const path = require('path');
 const spawn = require('cross-spawn');
@@ -19,7 +17,7 @@ module.exports = function exec(cmd, inherit = false) {
   const obsutil = defaultObsutil || 'obsutil';
 
   if (!obsutil) {
-    throw new Error(`${platform} obsutil is undefined, please install obsutil, https://support.huaweicloud.com/utiltg-obs/obs_11_0003.html`);
+    throw new Error(`${config.platform} obsutil is undefined, please install obsutil, https://support.huaweicloud.com/utiltg-obs/obs_11_0003.html`);
   }
 
   const result = spawn.sync(obsutil, cmd, inherit ? spawnOption : {});
