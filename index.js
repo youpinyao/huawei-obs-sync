@@ -27,9 +27,9 @@ if (commander.init) {
     commander.marker === true ? '' : commander.marker,
   );
 } else if (commander.syncDownload) {
-  require('./src/sync').download(config.get());
+  require('./src/sync').download();
 } else if (commander.syncUpload) {
-  require('./src/sync').upload(config.get());
+  require('./src/sync').upload();
 } else if (commander.stat) {
-  require('./src/stat')(config.get(), commander.stat);
+  require('./src/stat')(commander.stat);
 }

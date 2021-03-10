@@ -4,7 +4,9 @@ const handle = require('./handle');
 const path = require('path');
 const config = require('./config');
 
-module.exports = function stat({ obs, dir }, filename, inherit = true) {
+module.exports = function stat(filename, inherit = true) {
+  const { obs, dir } = config.get();
+
   handle.obsDir({ obs, dir });
 
   const to = config.replaceObs(path.join(obs, dir, filename));
