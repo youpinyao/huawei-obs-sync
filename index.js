@@ -10,6 +10,7 @@ commander
   .option('-m, --marker [marker]', 'list marker, use with -ls or --list')
   .option('-sd, --sync-download', 'download sync dir')
   .option('-su, --sync-upload', 'upload sync dir')
+  .option('-stat, --stat <filename>', 'query file stat')
   .parse(process.argv);
 
 if (commander.init) {
@@ -29,4 +30,6 @@ if (commander.init) {
   require('./src/sync').download(config.get());
 } else if (commander.syncUpload) {
   require('./src/sync').upload(config.get());
+} else if (commander.stat) {
+  require('./src/sync').stat(config.get(), commander.stat);
 }
