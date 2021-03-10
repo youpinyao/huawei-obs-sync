@@ -6,7 +6,6 @@ const config = require('./config');
 module.exports = {
   download,
   upload,
-  stat,
 }
 
 function download({ obs, dir }) {
@@ -27,13 +26,6 @@ function upload({ obs, dir }) {
   const to = config.replaceObs(path.join(obs, dir));
 
   const result = obsutil(['sync', from, to], true);
-
-  return result;
-}
-
-function stat({ obs, dir }, filename) {
-  const to = config.replaceObs(path.join(obs, dir, filename));
-  const result = obsutil(['stat', to], true);
 
   return result;
 }

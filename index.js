@@ -31,5 +31,5 @@ if (commander.init) {
 } else if (commander.syncUpload) {
   require('./src/sync').upload(config.get());
 } else if (commander.stat) {
-  require('./src/sync').stat(config.get(), commander.stat);
+  require('./src/stat')(config.get(), commander.stat);
 }
