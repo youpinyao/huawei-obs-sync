@@ -4,7 +4,7 @@ const spawn = require('cross-spawn');
 const config = require('./config');
 const spawnOption = { stdio: 'inherit' };
 
-module.exports = function exec(cmd, inherit = false, sync = true) {
+module.exports = function exec(cmd, inherit = true, sync = true) {
   // const obsutil = {
   //   'darwin': path.resolve(__dirname, '../package/obsutil_darwin_amd64_5.2.5/obsutil'),
   //   'linux': path.resolve(__dirname, '../package/obsutil_linux_amd64_5.2.5/obsutil'),
@@ -29,7 +29,6 @@ module.exports = function exec(cmd, inherit = false, sync = true) {
       throw result.error;
     }
   }
-
 
   if (sync && needSetAkSkEndPoint(toString(result))) {
     console.log(chalk.yellow('please run: obs --init'));
