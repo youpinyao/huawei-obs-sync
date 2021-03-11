@@ -4,7 +4,7 @@ const spawn = require('cross-spawn');
 const config = require('./config');
 const spawnOption = { stdio: 'inherit' };
 
-module.exports = function exec(cmd, inherit = false) {
+module.exports = function exec(cmd, inherit = false, sync = true) {
   // const obsutil = {
   //   'darwin': path.resolve(__dirname, '../package/obsutil_darwin_amd64_5.2.5/obsutil'),
   //   'linux': path.resolve(__dirname, '../package/obsutil_linux_amd64_5.2.5/obsutil'),
@@ -20,7 +20,7 @@ module.exports = function exec(cmd, inherit = false) {
     throw new Error(`${config.platform} obsutil is undefined, please install obsutil, https://support.huaweicloud.com/utiltg-obs/obs_11_0003.html`);
   }
 
-  const result = spawn.sync(obsutil, cmd, inherit ? spawnOption : {});
+  const result = (sync ? spawn.sync : spawn)(obsutil, cmd, inherit ? spawnOption : {});
 
   if (result.error) {
     if (result.error.stack.indexOf('obsutil ENOENT') !== -1) {
@@ -31,11 +31,11 @@ module.exports = function exec(cmd, inherit = false) {
   }
 
 
-  if (needSetAkSkEndPoint(toString(result))) {
+  if (sync && needSetAkSkEndPoint(toString(result))) {
     console.log(chalk.yellow('please run: obs --init'));
   }
 
-  return toString(result);
+  return sync ? toString(result) : result;
 }
 
 
