@@ -7,8 +7,7 @@
     "huawei-obs-sync": "index.js"
   },
   "scripts": {
-    "obs:sync:upload": "huawei-obs-sync --upload",
-    "obs:sync:download": "huawei-obs-sync --download"
+
   },
   "repository": {
     "type": "git",
@@ -27,6 +26,7 @@
     "esdk-obs-nodejs": "^3.20.12",
     "fs-extra": "^9.1.0",
     "input": "^1.0.1",
+    "progress": "^2.0.3",
     "user-home": "^2.0.0"
   },
   "devDependencies": {

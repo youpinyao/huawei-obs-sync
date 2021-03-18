@@ -24,7 +24,7 @@ module.exports = () => {
             console.error(chalk.red("listBuckets fail"), err);
             reject(err);
           } else {
-            console.error(chalk.green(`listBuckets success limit ${limit} marker ${marker}`));
+            // console.error(chalk.green(`listBuckets success limit ${limit} marker ${marker}`));
             if (result.CommonMsg.Status < 300 && result.InterfaceResult) {
               for (let j = 0; j < result.InterfaceResult.Contents.length; j++) {
                 const file = result.InterfaceResult.Contents[j].Key;
