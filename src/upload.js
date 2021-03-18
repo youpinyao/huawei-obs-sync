@@ -4,7 +4,7 @@ const checkDir = require("./checkDir");
 const traverseDir = require("./traverseDir");
 
 const path = require("path");
-const chalk = require("chalk");
+// const chalk = require("chalk");
 const ProgressBar = require("progress");
 
 module.exports = async () => {
@@ -31,6 +31,9 @@ module.exports = async () => {
         },
         (err, result) => {
           if (err) {
+            reject(err);
+            // console.log(chalk.red("上传失败"), file);
+          } else if (result.CommonMsg.Status >= 300) {
             reject(err);
             // console.log(chalk.red("上传失败"), file);
           } else {

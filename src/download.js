@@ -31,6 +31,9 @@ module.exports = async () => {
           if (err) {
             reject(err);
             // console.log(chalk.red("下载失败"), file);
+          } else if (result.CommonMsg.Status >= 300) {
+            reject(err);
+            // console.log(chalk.red("下载失败"), file);
           } else {
             resolve(result);
             // console.log(chalk.green("下载成功"), file);
