@@ -23,7 +23,7 @@ module.exports = {
 
 function get() {
   if (!fs.existsSync(name)) {
-    throw new Error('please run: obs --init obs');
+    throw new Error('please run: huawei-obs-sync --init');
   }
   return JSON.parse(fs.readFileSync(name).toString());
 }

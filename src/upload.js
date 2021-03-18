@@ -1,15 +1,45 @@
-const obsutil = require('./obsutil');
-const handle = require('./handle');
-const path = require('path');
-const config = require('./config');
+const client = require("./client");
+const config = require("./config");
+const checkDir = require("./checkDir");
+const traverseDir = require("./traverseDir");
 
-module.exports = (filename, from, inherit = true, sync = true) => {
-  const { obs, dir } = config.get();
+const path = require("path");
+const chalk = require("chalk");
 
-  handle.obsDir({ obs, dir });
+module.exports = async () => {
+  const obs = client();
+  const { bucket, dir } = config.get();
 
-  const to = config.replaceObs(path.join(obs, dir, filename));
-  const result = obsutil(['cp', from, to, '-f', '-r'], inherit, sync);
+  checkDir();
 
-  return result;
-}
+  const files = traverseDir(path.resolve(process.cwd(), dir));
+  const limit = 10;
+
+  const doUpload = (file) => {
+    return new Promise((resolve, reject) => {
+      console.log(chalk.yellow("上传中"), file);
+      obs.putObject(
+        {
+          Bucket: bucket,
+          Key: path.join(dir, path.relative(dir, file)),
+          SourceFile: file,
+        },
+        (err, result) => {
+          if (err) {
+            reject(err);
+            console.log(chalk.red("上传失败"), file);
+          } else {
+            resolve(result);
+            console.log(chalk.green("上传成功"), file);
+          }
+        }
+      );
+    });
+  };
+
+  for (let index = 0; index < Math.ceil(files.length / limit); index++) {
+    const partFiles = [].concat(files).splice(index * limit, limit);
+
+    await Promise.all(partFiles.map((item) => doUpload(item)));
+  }
+};

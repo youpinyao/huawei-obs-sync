@@ -8,7 +8,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 12,
   },
-  global: {
+  globals: {
     process: true,
   },
   rules: {},
