@@ -1,9 +1,7 @@
 const client = require("./client");
 const config = require("./config");
 
-const HuaWeiObsSync = {
-  getConfig: () => config(),
+module.exports = {
+  getConfig: () => config().get(),
   getClient: () => client(),
 };
-
-module.exports = HuaWeiObsSync;
