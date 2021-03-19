@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/youpinyao/obs.git"
+    "url": "git+https://github.com/youpinyao/huawei-obs-sync.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/youpinyao/obs/issues"
+    "url": "https://github.com/youpinyao/huawei-obs-sync/issues"
   },
-  "homepage": "https://github.com/youpinyao/obs#readme",
+  "homepage": "https://github.com/youpinyao/huawei-obs-sync#readme",
   "dependencies": {
     "chalk": "^4.1.0",
     "commander": "^6.0.0",
