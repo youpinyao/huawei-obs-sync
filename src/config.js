@@ -10,13 +10,11 @@ module.exports = {
   get,
   set,
   platform,
-  replaceObs: str => {
-    let newStr = str.replace(/obs:/, platform === 'win32' ? 'obs:\\' : 'obs:/');
-
+  withWindows: str => {
     if (platform === 'win32') {
-      return newStr.replace(/\\/g, '/');
+      return str.replace(/\\/g, '/');
     }
-    return newStr;
+    return str;
   },
   package: path.resolve(process.cwd(), './package.json'),
 }

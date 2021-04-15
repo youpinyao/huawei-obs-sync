@@ -22,11 +22,10 @@ module.exports = async () => {
 
   const doUpload = (file) => {
     return new Promise((resolve, reject) => {
-      // console.log(chalk.yellow("上传中"), file);
       obs.putObject(
         {
           Bucket: bucket,
-          Key: path.join(dir, path.relative(dir, file)),
+          Key: config.withWindows(path.join(dir, path.relative(dir, file))),
           SourceFile: file,
         },
         (err, result) => {
