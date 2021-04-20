@@ -17,3 +17,10 @@ npm run obs:sync:upload
 ```node
 npm run obs:sync:upload
 ```
+
+
+##
+
+```node
+https://support.huaweicloud.com/sdk-nodejs-devg-obs/obs_29_0603.html
+```
