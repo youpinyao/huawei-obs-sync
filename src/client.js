@@ -1,9 +1,9 @@
 const ObsClient = require("esdk-obs-nodejs");
 const config = require("./config");
 
-module.exports = () => {
+module.exports = (opts) => {
   // 创建ObsClient实例
   return new ObsClient({
-    ...config.get(),
+    ...(opts || config.get()),
   });
 };
